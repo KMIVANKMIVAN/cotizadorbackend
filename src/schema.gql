@@ -1,0 +1,512 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type TipoEmpresa {
+  id: ID!
+  tipo: String!
+  empresas: [Empresa!]!
+}
+
+type Empresa {
+  id: ID!
+  razon_social: String!
+  nit_empresa: String!
+  direccion_empresa: String!
+  pagina_web_empresa: String
+  telefono_empresa: String
+  linea_gratuita: String
+  celular_empresa: String
+  correo_empresa: String
+  tipo_empresa: TipoEmpresa!
+  usuarios: [Usuario!]!
+}
+
+type Sucursal {
+  id: ID!
+  sucursal: String!
+  usuarios: [Usuario!]!
+}
+
+type Cliente {
+  id: ID!
+  ap_paterno: String
+  ap_materno: String
+  ap_casado: String
+  nombres: String!
+  numero_carnet: String
+  extesion: String
+  fechanacimiento: String!
+  correo: String
+  celular: String
+  telefono: String
+  cotizaciones: [Cotizacione!]!
+}
+
+type Valorparametro {
+  id: ID!
+  valorString: String
+  valorInt: Float
+  valorLista: Float
+  valorDouble: Float
+  valorBoolean: Boolean
+  parametro: Parametro!
+  cotizacione: Cotizacione!
+  producto: Producto!
+}
+
+type Parametro {
+  id: ID!
+  descripcion: String!
+  tipo: String!
+  nrolista: Int
+  obligatorio: Boolean!
+  fila: Int!
+  columna: Int!
+  producto: Producto!
+  valorparametros: [Valorparametro!]!
+}
+
+type Producto {
+  id: ID!
+  descripcion: String
+  cotizaciones: [Cotizacione!]!
+  parametros: [Parametro!]!
+  valorparametros: [Valorparametro!]!
+}
+
+type Cotizacione {
+  id: ID!
+  cliente: Cliente!
+  usuario: Usuario!
+  producto: Producto!
+  valorparametros: [Valorparametro!]!
+}
+
+type Usuario {
+  id: ID!
+  ap_paterno: String
+  ap_materno: String
+  ap_casado: String
+  nombres: String!
+  numero_carnet: String
+  extesion: String
+  correo: String!
+  password: String!
+  estado: Boolean!
+  celular: String
+  telefono: String
+  nit_usuario: String
+  direccion_usuario: String
+  pagina_web_usuario: String
+  rol: Rol!
+  sucursal: Sucursal!
+  empresa: Empresa!
+  cotizaciones: [Cotizacione!]!
+}
+
+type Rol {
+  id: ID!
+  rol: String!
+  tiporol: String!
+  usuarios: [Usuario!]!
+}
+
+type AuthResponse {
+  token: String!
+  usuario: Usuario!
+}
+
+type Listaparametro {
+  id: ID!
+  nrolista: Int!
+  valor: String!
+  descripcion: String!
+}
+
+type Query {
+  """Revalidar Token"""
+  RevalidarToken: AuthResponse!
+
+  """Muestra todos los Usuarios"""
+  MostrarUsuario: [Usuario!]!
+
+  """Busca Usuarios"""
+  BuscarUsuario(search: String): [Usuario!]!
+
+  """Busca por CI Usuarios"""
+  BuscarCiUsuario(search: String): [Usuario!]!
+
+  """Limita la cantidad de Usuarios"""
+  limitOffsetUsuario(offset: Int = 0, limit: Int = 10): [Usuario!]!
+
+  """Busca y Muestra un Usuario"""
+  BuscarMostrarUsuario(id: Int!): Usuario!
+
+  """Busca y Muestra un Usuario por su Correo"""
+  MostrarUsuarioPorCorreo(correo: String!): Usuario!
+
+  """Muestra todas las Empresas"""
+  MostrarEmpresas: [Empresa!]!
+
+  """Busca y Muestra una Empresa"""
+  BuscarMostrarEmpresa(id: ID!): Empresa!
+
+  """Busca y Muestra todo menos una Empresa Vitalicia"""
+  BuscarTodoMenos: [Empresa!]!
+
+  """Busca y Muestra la Empresa Vitalicia"""
+  SoloVitalicia: [Empresa!]!
+
+  """Muestra todas las Tipo Empresas"""
+  MostrarTipoEmpresa: [TipoEmpresa!]!
+
+  """Busca y Muestra Tipo Empresa Externa"""
+  BuscarMostrarTipoEmpresaExterna: [TipoEmpresa!]!
+
+  """Busca y Muestra un Tipo Empresa"""
+  BuscarMostrarTipoEmpresa(id: ID!): TipoEmpresa!
+
+  """Muestra todos los Roles"""
+  MostrarRoles: [Rol!]!
+
+  """Muestra todos los Roles"""
+  MostrarRolesInternos: [Rol!]!
+
+  """Muestra todos los Roles"""
+  MostrarRolesExternos: [Rol!]!
+
+  """Busca y Muestra un Rol"""
+  BuscarMostrarRol(id: ID!): Rol!
+
+  """Muestra todas las Sucursales"""
+  MostrarSucursales: [Sucursal!]!
+
+  """Busca y Muestra una Sucursal"""
+  BuscarMostrarSucursal(id: ID!): Sucursal!
+
+  """Muestra todos los Clientes"""
+  MostrarCliente: [Cliente!]!
+
+  """Busca y Muestra un Cliente"""
+  BuscarMostrarCliente(id: Int!): Cliente!
+
+  """Muestra todos los Cotizacione"""
+  MostrarCotizacione: [Cotizacione!]!
+
+  """Busca y Muestra un Cotizacione"""
+  BuscarMostrarCotizacione(id: Int!): Cotizacione!
+
+  """Muestra todos los Productos"""
+  MostrarProducto: [Producto!]!
+
+  """Busca y Muestra un Producto"""
+  BuscarMostrarProducto(id: Int!): Producto!
+
+  """Muestra todos los Valorparametro"""
+  MostrarValorparametro: [Valorparametro!]!
+
+  """Busca y Muestra un Valorparametro"""
+  BuscarMostrarValorparametro(id: Int!): Valorparametro!
+
+  """Muestra todos los Parametro"""
+  MostrarParametro: [Parametro!]!
+
+  """Busca y Muestra un Parametro"""
+  BuscarMostrarParametro(id: Int!): Parametro!
+
+  """Muestra todos los Listaparametro"""
+  MostrarListaparametro: [Listaparametro!]!
+
+  """Busca y Muestra un Listaparametro"""
+  BuscarMostrarListaparametro(id: Int!): Listaparametro!
+}
+
+type Mutation {
+  """Para Iniciar Sesion"""
+  login(loginInput: LoginInput!): AuthResponse!
+
+  """Ejecuta la creacion de Usuario"""
+  CrearUsuario(createUsuarioInput: CreateUsuarioInput!): Usuario!
+
+  """Actualiza un Usuario"""
+  ActualizarUsuario(updateUsuarioInput: UpdateUsuarioInput!): Usuario!
+
+  """Actualiza un Usuario Password"""
+  ActualizarUsuarioPassword(updateUsuarioInput: UpdateUsuarioInput!): Usuario!
+
+  """Actualiza un Usuario Sucursal"""
+  ActualizarUsuarioSucursal(updateUsuarioInput: UpdateUsuarioInput!): Usuario!
+
+  """Actualiza un Usuario Activo"""
+  ActualizarUsuarioActivo(updateUsuarioInput: UpdateUsuarioInput!): Usuario!
+
+  """Actualiza un Usuario Inactivo"""
+  ActualizarUsuarioInactivo(updateUsuarioInput: UpdateUsuarioInput!): Usuario!
+
+  """Ejecuta la creacion de Empresa"""
+  CrearEmpresa(createEmpresaInput: CreateEmpresaInput!): Empresa!
+
+  """Actualiza una Empresa"""
+  ActualizarEmpresa(updateEmpresaInput: UpdateEmpresaInput!): Empresa!
+
+  """Ejecuta la creacion de Tipos de Empresas"""
+  CrearTipoEmpresa(createTipoEmpresaInput: CreateTipoEmpresaInput!): TipoEmpresa!
+
+  """Actualiza un Tipo Empresa"""
+  ActualizarTipoEmpresa(updateTipoEmpresaInput: UpdateTipoEmpresaInput!): TipoEmpresa!
+
+  """Ejecuta la creacion de Rol"""
+  CrearRol(createRolInput: CreateRolInput!): Rol!
+
+  """Actualiza un Rol"""
+  ActualizarRol(updateRolInput: UpdateRolInput!): Rol!
+
+  """Ejecuta la creacion de Sucursal"""
+  CrearSucursal(createSucursalInput: CreateSucursalInput!): Sucursal!
+
+  """Actualiza una Sucursal"""
+  ActualizarSucursal(updateSucursalInput: UpdateSucursalInput!): Sucursal!
+
+  """Ejecuta la construcción de la base de datos"""
+  EjecutarSemilla: Boolean!
+
+  """Ejecuta la creacion de Cliente"""
+  CrearCliente(createClienteInput: CreateClienteInput!): Cliente!
+
+  """Actualiza un Cliente"""
+  ActualizarCliente(updateClienteInput: UpdateClienteInput!): Cliente!
+
+  """Ejecuta la creacion de Cotizacione"""
+  CrearCotizacione(createCotizacioneInput: CreateCotizacioneInput!): Cotizacione!
+
+  """Actualiza un Cotizacione"""
+  ActualizarCotizacione(updateCotizacioneInput: UpdateCotizacioneInput!): Cotizacione!
+
+  """Ejecuta la creacion de Producto"""
+  CrearProducto(createProductoInput: CreateProductoInput!): Producto!
+
+  """Actualiza un Producto"""
+  ActualizarProducto(updateProductoInput: UpdateProductoInput!): Producto!
+
+  """Ejecuta la creacion de Valorparametroslista"""
+  CreateValorparametrosLista(createValorparametroInput: CreateValorparametroInput!): Boolean!
+
+  """Actualiza un Valorparametro"""
+  ActualizarValorparametro(updateValorparametroInput: UpdateValorparametroInput!): Valorparametro!
+
+  """Ejecuta la creacion de Parametro"""
+  CrearteParametro(createParametroInput: CreateParametroInput!): Parametro!
+
+  """Actualiza un Parametro"""
+  ActualizarParametro(updateParametroInput: UpdateParametroInput!): Parametro!
+
+  """Ejecuta la creacion de Listaparametro"""
+  CrearteListaparametro(createListaparametroInput: CreateListaparametroInput!): Listaparametro!
+
+  """Actualiza un Listaparametro"""
+  ActualizarListaparametro(updateListaparametroInput: UpdateListaparametroInput!): Listaparametro!
+}
+
+input LoginInput {
+  correo: String!
+  password: String!
+}
+
+input CreateUsuarioInput {
+  ap_paterno: String
+  ap_materno: String
+  ap_casado: String
+  nombres: String!
+  numero_carnet: String
+  extesion: String
+  correo: String!
+  password: String!
+  estado: Boolean!
+  celular: String
+  telefono: String
+  nit_usuario: String
+  direccion_usuario: String
+  pagina_web_usuario: String
+  rolId: Int!
+  sucursalId: Int!
+  empresasId: Int!
+}
+
+input UpdateUsuarioInput {
+  ap_paterno: String
+  ap_materno: String
+  ap_casado: String
+  nombres: String
+  numero_carnet: String
+  extesion: String
+  correo: String
+  password: String
+  estado: Boolean
+  celular: String
+  telefono: String
+  nit_usuario: String
+  direccion_usuario: String
+  pagina_web_usuario: String
+  rolId: Int
+  sucursalId: Int
+  empresasId: Int
+  id: Int!
+}
+
+input CreateEmpresaInput {
+  razon_social: String!
+  nit_empresa: String!
+  direccion_empresa: String!
+  pagina_web_empresa: String
+  telefono_empresa: String
+  linea_gratuita: String
+  celular_empresa: String
+  correo_empresa: String
+  tipo_empresas_id: Int!
+}
+
+input UpdateEmpresaInput {
+  razon_social: String
+  nit_empresa: String
+  direccion_empresa: String
+  pagina_web_empresa: String
+  telefono_empresa: String
+  linea_gratuita: String
+  celular_empresa: String
+  correo_empresa: String
+  tipo_empresas_id: Int
+  id: Int!
+}
+
+input CreateTipoEmpresaInput {
+  tipo: String!
+}
+
+input UpdateTipoEmpresaInput {
+  tipo: String
+  id: Int!
+}
+
+input CreateRolInput {
+  rol: String!
+  tiporol: String!
+}
+
+input UpdateRolInput {
+  rol: String
+  tiporol: String
+  id: Int!
+}
+
+input CreateSucursalInput {
+  sucursal: String!
+}
+
+input UpdateSucursalInput {
+  sucursal: String
+  id: Int!
+}
+
+input CreateClienteInput {
+  ap_paterno: String
+  ap_materno: String
+  ap_casado: String
+  nombres: String!
+  numero_carnet: String
+  extesion: String
+  fechanacimiento: String!
+  celular: String
+  telefono: String
+  correo: String
+}
+
+input UpdateClienteInput {
+  ap_paterno: String
+  ap_materno: String
+  ap_casado: String
+  nombres: String
+  numero_carnet: String
+  extesion: String
+  fechanacimiento: String
+  celular: String
+  telefono: String
+  correo: String
+  id: Int!
+}
+
+input CreateCotizacioneInput {
+  productoId: Int!
+  usuarioId: Int!
+  clienteId: Int!
+}
+
+input UpdateCotizacioneInput {
+  productoId: Int
+  usuarioId: Int
+  clienteId: Int
+  id: Int!
+}
+
+input CreateProductoInput {
+  descripcion: String
+}
+
+input UpdateProductoInput {
+  descripcion: String
+  id: Int!
+}
+
+input CreateValorparametroInput {
+  cotizacionId: Int!
+  productoId: Int!
+  valores: [ValoresInput!]!
+}
+
+input ValoresInput {
+  parametroId: Int!
+  valor: AnyScalar!
+}
+
+scalar AnyScalar
+
+input UpdateValorparametroInput {
+  cotizacionId: Int
+  productoId: Int
+  valores: [ValoresInput!]
+  id: Int!
+}
+
+input CreateParametroInput {
+  descripcion: String!
+  tipo: String!
+  nrolista: Int
+  obligatorio: Boolean!
+  fila: Int!
+  columna: Int!
+  productoId: Int!
+}
+
+input UpdateParametroInput {
+  descripcion: String
+  tipo: String
+  nrolista: Int
+  obligatorio: Boolean
+  fila: Int
+  columna: Int
+  productoId: Int
+  id: Int!
+}
+
+input CreateListaparametroInput {
+  nrolista: Int!
+  valor: String!
+  descripcion: String!
+}
+
+input UpdateListaparametroInput {
+  nrolista: Int
+  valor: String
+  descripcion: String
+  id: Int!
+}
